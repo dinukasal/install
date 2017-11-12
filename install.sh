@@ -2,7 +2,7 @@
 #lamp
 
 echo "currently supports only Ubuntu 16.04"
-echo "You need to install lamp, mean, mongo?"
+echo "You need to install lamp, mean, mongo, opencv?"
 
 read input
 
@@ -43,6 +43,112 @@ elif [ $input == "mean" ]; then
 	sudo apt install build-essential
 	
 	echo "mean stack installed!"
+
+elif [ $input == "opencv" ]; then
+	## not tested 
+	echo "--- Removing any pre-installed ffmpeg and x264"
+	sudo apt-get -qq remove ffmpeg x264 libx264-dev
+
+	function install_dependency {
+		echo "--- Installing dependency: $1"
+		sudo apt-get -y install $1
+	}
+
+	install_dependency libopencv-dev
+	install_dependency build-essential
+	install_dependency checkinstall
+	install_dependency cmake
+	install_dependency pkg-config
+	install_dependency yasm
+	install_dependency libtiff5-dev
+	install_dependency libjpeg-dev
+	install_dependency libjasper-dev
+	install_dependency libavcodec-dev
+	install_dependency libavformat-dev
+	install_dependency libswscale-dev
+	install_dependency libdc1394-22-dev
+	install_dependency libxine2-dev
+	install_dependency libgstreamer0.10-dev
+	install_dependency libgstreamer-plugins-base0.10-dev
+	install_dependency libv4l-dev
+	install_dependency python-dev
+	install_dependency python-numpy
+	install_dependency libtbb-dev
+	install_dependency libqt5x11extras5
+	install_dependency libqt5opengl5
+	install_dependency libqt5opengl5-dev
+	install_dependency libgtk2.0-dev
+	install_dependency libfaac-dev
+	install_dependency libmp3lame-dev
+	install_dependency libopencore-amrnb-dev
+	install_dependency libopencore-amrwb-dev
+	install_dependency libtheora-dev
+	install_dependency libvorbis-dev
+	install_dependency libxvidcore-dev
+	install_dependency x264
+	install_dependency v4l-utils
+	#install_dependency ffmpeg
+	install_dependency unzip
+
+	version="$(wget -q -O - http://sourceforge.net/projects/opencvlibrary/files/opencv-unix | egrep -o '\"[0-9](\.[0-9]+)+(-[-a-zA-Z0-9]+)?' | cut -c2- |sort -V -r -u |head -1)"
+	downloadfilelist="opencv-$version.tar.gz opencv-$version.zip"
+	downloadfile=
+	for file in $downloadfilelist;
+	do
+			wget --spider http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/$version/$file/download
+			if [ $? -eq 0 ]; then
+					downloadfile=$file
+			fi
+	done
+	if [ -z "$downloadfile" ]; then
+			echo "Could not find download file on sourceforge page.  Please find the download file for version $version at"
+			echo "http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/$version/ and update this script"
+			exit  1
+	fi
+
+	if [[ -z "$version" ]]; then
+    echo "Please define version before calling `basename $0` or use a wrapper like opencv_latest.sh"
+	fi
+
+	if [[ -z "$downloadfile" ]]; then
+		echo "Please define downloadfile before calling `basename $0` or use a wrapper like opencv_latest.sh"
+		exit 1
+	fi
+	if [[ -z "$dldir" ]]; then
+		dldir=OpenCV
+	fi
+	if ! sudo true; then
+		echo "You must have root privileges to run this script."
+		exit 1
+	fi
+	set -e
+
+	echo "--- Installing OpenCV" $version
+
+	echo "--- Installing Dependencies"
+	source dependencies.sh
+
+	echo "--- Downloading OpenCV" $version
+	mkdir -p $dldir
+	cd $dldir
+	wget -c -O $downloadfile http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/$version/$downloadfile/download
+
+	echo "--- Installing OpenCV" $version
+	echo $downloadfile | grep ".zip"
+	if [ $? -eq 0 ]; then
+		unzip $downloadfile
+	else
+		tar -xvf $downloadfile
+	fi
+	cd opencv-$version
+	mkdir build
+	cd build
+	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON ..
+	make -j 4
+	sudo make install
+	sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+	sudo ldconfig
+	echo "OpenCV" $version "ready to be used"
 
 else 
 	echo "Nothing installed!"
