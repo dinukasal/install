@@ -10,5 +10,6 @@ It has,
 1. lamp(linux - apache,mysql,php ) stack, 
 2. mean(mongo, express js, Angular js, node js
 3. mongodb
+4. opencv
 
 referred this for opencv https://github.com/jayrambhia/Install-OpenCV
