@@ -1,4 +1,4 @@
-#Installer script for linux
+# Installer script for linux
 
 You can install packages you require easily with this script
 
