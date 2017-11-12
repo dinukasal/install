@@ -1,22 +1,31 @@
+#!/bin/bash
 #lamp
 
-echo "installing lamp.."
-sudo apt update
-sudo apt install apache2 -y
-sudo apache2ctl configtest
+echo "You need to install lamp, mean, mongo?"
 
-echo "Adjust the Firewall to Allow Web Traffic"
-sudo ufw app list
-sudo ufw app info "Apache Full"
+read input
 
-echo "Allow incoming traffic for this profile"
-sudo ufw allow in "Apache Full"
+if [ $input == "lamp" ]; then
+	echo "installing lamp.."
+	sudo apt update
+	sudo apt install apache2 -y
+	sudo apache2ctl configtest
 
-echo "installing mysql.."
-sudo apt install mysql-server -y
+	echo "Adjust the Firewall to Allow Web Traffic"
+	sudo ufw app list
+	sudo ufw app info "Apache Full"
 
-echo "installing php.."
-sudo apt install php libapache2-mod-php php-mcrypt php-mysql -y
+	echo "Allow incoming traffic for this profile"
+	sudo ufw allow in "Apache Full"
 
-sudo systemctl status apache2
+	echo "installing mysql.."
+	sudo apt install mysql-server -y
 
+	echo "installing php.."
+	sudo apt install php libapache2-mod-php php-mcrypt php-mysql -y
+
+	sudo systemctl status apache2
+else 
+	echo "Nothing installed!"
+	echo "bye"
+fi
