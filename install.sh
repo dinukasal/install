@@ -189,7 +189,7 @@ elif [ $input == "docker" ]; then
         echo "Exited without adding privileges to Docker"
     fi
 
-    echo "Docker is ready to use in your system!"
+    echo "Docker is ready to use on your system!"
 
 else 
 	echo "Nothing installed!"
