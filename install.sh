@@ -160,11 +160,11 @@ elif [ $input == "jdk" ]; then
 elif [ $input == "docker" ]; then
     echo "Installing Docker...."
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-sudo apt-get update
+    sudo apt-get update
 
     echo "Make sure the Docker is installed from Official Docker repo to get the latest version"
 	dockerInstallLoc="$(apt-cache policy docker-ce)"
