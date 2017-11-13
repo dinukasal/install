@@ -150,6 +150,12 @@ elif [ $input == "opencv" ]; then
 	sudo ldconfig
 	echo "OpenCV" $version "ready to be used"
 
+elif [ $input == "jdk" ]; then
+	sudo add-apt-repository ppa:webupd8team/java
+	sudo apt update; sudo apt install oracle-java8-installer
+	javac -version
+	sudo apt install oracle-java8-set-default
+
 else 
 	echo "Nothing installed!"
 	echo "bye"
