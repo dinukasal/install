@@ -166,7 +166,7 @@ elif [ $input == "docker" ]; then
 
         sudo apt-get update
 
-        echo "Make sure the Docker is installed from Official Docker repo to get the latest version"
+        echo "Making sure the Docker is installed from Official Docker repo to get the latest version"
         dockerInstallLoc="$(apt-cache policy docker-ce)"
         echo "${dockerInstallLoc}"
 
