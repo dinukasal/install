@@ -2,7 +2,7 @@
 #lamp
 
 echo "currently supports only Ubuntu 16.04"
-echo "You need to install lamp, mean, mongo, opencv?"
+echo "You need to install lamp, mean, mongo, opencv, jdk ?"
 
 read input
 
@@ -152,6 +152,7 @@ elif [ $input == "opencv" ]; then
 
 elif [ $input == "jdk" ]; then
 	sudo add-apt-repository ppa:webupd8team/java
+
 	sudo apt update; sudo apt install oracle-java8-installer
 	javac -version
 	sudo apt install oracle-java8-set-default
