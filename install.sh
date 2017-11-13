@@ -158,38 +158,38 @@ elif [ $input == "jdk" ]; then
 	sudo apt install oracle-java8-set-default
 
 elif [ $input == "docker" ]; then
-    echo "Installing Docker...."
+        echo "Installing Docker...."
 
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-    sudo apt-get update
+        sudo apt-get update
 
-    echo "Make sure the Docker is installed from Official Docker repo to get the latest version"
-	dockerInstallLoc="$(apt-cache policy docker-ce)"
-	echo "${dockerInstallLoc}"
+        echo "Make sure the Docker is installed from Official Docker repo to get the latest version"
+        dockerInstallLoc="$(apt-cache policy docker-ce)"
+        echo "${dockerInstallLoc}"
 
-    sudo apt-get install -y docker-ce
+        sudo apt-get install -y docker-ce
 
-    dockerSuccess="$(sudo systemctl status docker)"
-    echo "${dockerSuccess}"
+        dockerSuccess="$(sudo systemctl status docker)"
+        echo "${dockerSuccess}"
 
-    echo "Successfully installed Docker!"
+        echo "Successfully installed Docker!"
 
-    read -r -p "Do you want to add root privileges to run Docker? [Y/n]" response
-    response="${response,,}"
+        read -r -p "Do you want to add root privileges to run Docker? [Y/n]" response
+        response="${response,,}"
 
-    if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
-        echo "Adding your username into Docker group"
-        sudo usermod -aG docker ${USER}
-        su - ${USER}
-        echo "Addition of Username to Docker group is successful!"
-    else
-        echo "Exited without adding root privileges to run Docker"
-    fi
+        if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
+            echo "Adding your username into Docker group"
+            sudo usermod -aG docker ${USER}
+            su - ${USER}
+            echo "Addition of Username to Docker group is successful!"
+        else
+            echo "Exited without adding root privileges to run Docker"
+        fi
 
-    echo "Docker is ready to use on your system!"
+        echo "Docker is ready to use on your system!"
 
 else 
 	echo "Nothing installed!"
