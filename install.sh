@@ -186,7 +186,7 @@ elif [ $input == "docker" ]; then
         su - ${USER}
         echo "Addition of Username to Docker group is successful!"
     else
-        echo "Exited without adding privileges to Docker"
+        echo "Exited without adding root privileges to run Docker"
     fi
 
     echo "Docker is ready to use on your system!"
