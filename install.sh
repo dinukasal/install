@@ -156,9 +156,9 @@ elif [ $input == "opencv" ]; then
 elif [ $input == "jdk" ]; then
 	sudo add-apt-repository ppa:webupd8team/java
 
-	sudo apt update; sudo apt install oracle-java8-installer
+	sudo apt update; sudo apt install -y oracle-java8-installer
 	javac -version
-	sudo apt install oracle-java8-set-default
+	sudo apt install -y oracle-java8-set-default
 
 elif [ $input == "docker" ]; then
         echo "Installing Docker...."
