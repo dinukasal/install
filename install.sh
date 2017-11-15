@@ -209,15 +209,15 @@ elif [ $input == "mvn" ] || [ $input == "maven" ] ; then
 		mvn --version
 
 elif [ $input == "hadoop" ]; then
-		wget http://apache.mirrors.tds.net/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+		wget http://www-us.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz
 		wget https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz.mds
 		shasum -a 256 hadoop-2.7.3.tar.gz
 		cat hadoop-2.7.3.tar.gz.mds
 
 		echo "please check for the checksums"
 
-		tar -xzvf hadoop-2.7.3.tar.gz
-		sudo mv hadoop-2.7.3 /usr/local/hadoop
+		tar -xzvf hadoop-2.7.4.tar.gz
+		sudo mv hadoop-2.7.4 /usr/local/hadoop
 		#readlink -f /usr/bin/java | sed "s:bin/java::"
 		sudo ln -s /usr/local/hadoop/bin/hadoop /usr/bin
 
