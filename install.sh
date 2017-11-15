@@ -2,7 +2,7 @@
 #lamp
 
 echo "currently supports only Ubuntu 16.04"
-echo "You need to install lamp, mean, mongo, opencv, jdk, docker, mvn ?"
+echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop] ?"
 
 read input
 
@@ -207,6 +207,20 @@ elif [ $input == "mvn" ] || [ $input == "maven" ] ; then
 		sudo chmod +x /etc/profile.d/mavenenv.sh
 		source /etc/profile.d/mavenenv.sh
 		mvn --version
+
+elif [ $input == "hadoop" ]; then
+		wget http://apache.mirrors.tds.net/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+		wget https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz.mds
+		shasum -a 256 hadoop-2.7.3.tar.gz
+		cat hadoop-2.7.3.tar.gz.mds
+
+		echo "please check for the checksums"
+
+		tar -xzvf hadoop-2.7.3.tar.gz
+		sudo mv hadoop-2.7.3 /usr/local/hadoop
+		#readlink -f /usr/bin/java | sed "s:bin/java::"
+		sudo ln -s /usr/local/hadoop/bin/hadoop /usr/bin
+
 
 else 
 	echo "Nothing installed!"

@@ -3,7 +3,7 @@
 You can install packages you require easily with this script
 
 you just need to run the install.sh and it will prompt what you want.
-Just enter the package name eg. "lamp", "mean", "mongo", "opencv", "maven" , "mvn"
+Just enter the package name eg. "lamp", "mean", "mongo", "opencv", "maven" , "mvn", "hadoop"
 
 It has,
 
