@@ -223,7 +223,9 @@ elif [ $input == "hadoop" ]; then
 		echo 'export HADOOP_INSTALL=/usr/local/hadoop' | sudo tee -a ~/.bashrc
 		echo 'export PATH=$PATH:$HADOOP_INSTALL/bin' | sudo tee -a ~/.bashrc
 		echo 'export PATH=$PATH:$HADOOP_INSTALL/sbin' | sudo tee -a ~/.bashrc
-		source ~/.bashrc
+		alias brc='source ~/.bashrc'
+		
+		echo "please run 'source ~/.bashrc' if hadoop is not working"
 
 else 
 	echo "Nothing installed!"
