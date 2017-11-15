@@ -219,12 +219,11 @@ elif [ $input == "hadoop" ]; then
 		tar -xzvf hadoop-2.7.4.tar.gz
 		sudo mv hadoop-2.7.4 /usr/local/hadoop
 		#readlink -f /usr/bin/java | sed "s:bin/java::"
-		sudo ln -s /usr/local/hadoop/bin/hadoop /usr/bin
 		echo 'export JAVA_HOME=/usr/lib/jvm/java-8-oracle/' | sudo tee -a ~/.bashrc
 		echo 'export HADOOP_INSTALL=/usr/local/hadoop' | sudo tee -a ~/.bashrc
 		echo 'export PATH=$PATH:$HADOOP_INSTALL/bin' | sudo tee -a ~/.bashrc
 		echo 'export PATH=$PATH:$HADOOP_INSTALL/sbin' | sudo tee -a ~/.bashrc
-		
+		source ~/.bashrc
 
 else 
 	echo "Nothing installed!"
