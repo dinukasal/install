@@ -2,7 +2,7 @@
 #lamp
 
 echo "currently supports only Ubuntu 16.04"
-echo "You need to install lamp, mean, mongo, opencv, jdk, docker ?"
+echo "You need to install lamp, mean, mongo, opencv, jdk, docker, mvn ?"
 
 read input
 
@@ -153,8 +153,8 @@ elif [ $input == "opencv" ]; then
 	sudo ldconfig
 	echo "OpenCV" $version "ready to be used"
 
-elif [ $input == "jdk" ]; then
-	sudo add-apt-repository ppa:webupd8team/java
+elif [ $input == "jdk" ] || [ $input == "java" ]; then
+	sudo add-apt-repository ppa:webupd8team/java -y
 
 	sudo apt update; sudo apt install -y oracle-java8-installer
 	javac -version
@@ -193,6 +193,20 @@ elif [ $input == "docker" ]; then
         fi
 
         echo "Docker is ready to be used"
+
+elif [ $input == "mvn" ] || [ $input == "maven" ] ; then
+		sudo add-apt-repository ppa:webupd8team/java -y
+		sudo apt update -y
+		sudo apt install -y oracle-java8-installer
+		cd /opt/
+		wget http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+		sudo tar -xvzf apache-maven-3.3.9-bin.tar.gz
+		sudo mv apache-maven-3.3.9 maven 
+		echo 'export M2_HOME=/opt/maven
+				export PATH=${M2_HOME}/bin:${PATH}' > /etc/profile.d/mavenenv.sh;
+		sudo chmod +x /etc/profile.d/mavenenv.sh
+		sudo source /etc/profile.d/mavenenv.sh
+		mvn --version
 
 else 
 	echo "Nothing installed!"
