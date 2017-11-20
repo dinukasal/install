@@ -11,5 +11,8 @@ It has,
 2. mean(mongo, express js, Angular js, node js
 3. mongodb
 4. opencv
+5. Docker
+6. Hadoop
+7. VNC Server
 
 referred this for opencv https://github.com/jayrambhia/Install-OpenCV

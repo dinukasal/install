@@ -2,7 +2,7 @@
 #lamp
 
 echo "currently supports only Ubuntu 16.04"
-echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop] ?"
+echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop/vncserver] ?"
 
 read input
 
@@ -226,6 +226,10 @@ elif [ $input == "hadoop" ]; then
 		alias brc='source ~/.bashrc'
 		
 		echo "please run 'source ~/.bashrc' if hadoop is not working"
+
+elif [ $input == "vncserver" ]; then
+
+		sudo apt install xfce4 xfce4-goodies tightvncserver
 
 else 
 	echo "Nothing installed!"
