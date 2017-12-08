@@ -1,6 +1,6 @@
 # Installer Script for Linux
 
-You can install packages you require easily with this script
+You can install packages you require easily with this script. (Currently supports only Ubuntu 16.04)
 
 You just need to run the install.sh and it will prompt what you want.
 Just enter the package name eg. "lamp", "mean", "mongo", "opencv", "maven" , "mvn", "hadoop"
@@ -17,7 +17,8 @@ It has,
 
 -- Referred this for opencv https://github.com/jayrambhia/Install-OpenCV
 
-Dependencies 
+Prerequsites to run the script 
 
-1. curl
-2. wget
+1. curl Installed.
+2. wget Installed.
+3. Root user privilege
