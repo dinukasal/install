@@ -1,13 +1,13 @@
 #!/bin/bash
 #lamp
 
-echo "currently supports only Ubuntu 16.04"
-echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop/vncserver] ?"
+echo "Currently supports only Ubuntu 16.04"
+echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop/vncserver/nvm] ?"
 
 read input
 
 if [ $input == "lamp" ]; then
-	echo "installing lamp stack.."
+	echo "Installing lamp stack.."
 	sudo apt update
 	sudo apt install apache2 -y
 	sudo apache2ctl configtest
@@ -26,10 +26,10 @@ if [ $input == "lamp" ]; then
 	sudo apt install php libapache2-mod-php php-mcrypt php-mysql -y
 
 	sudo systemctl status apache2
-	echo "lamp stack installed"
+	echo "LAMP Stack Installed"
 
 elif [ $input == "mean" ]; then
-	echo "installing mean stack.."
+	echo "Installing mean stack.. [Installs MongoDB, NodeJS version 6+]"
 	sudo apt install git -y
 	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 	
@@ -40,12 +40,12 @@ elif [ $input == "mean" ]; then
 	sudo systemctl start mongod
 	service mongod status
 
-	echo "installing nodejs.."
+	echo "installing nodejs.. - To install your own NodeJS version, try nvm option"
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 	sudo apt install -y nodejs
 	sudo apt install build-essential
 	
-	echo "mean stack installed!"
+	echo "MEAN stack Installed!"
 
 elif [ $input == "opencv" ]; then
 	## not tested 
@@ -195,6 +195,7 @@ elif [ $input == "docker" ]; then
         echo "Docker is ready to be used"
 
 elif [ $input == "mvn" ] || [ $input == "maven" ] ; then
+        echo "Installing Maven...."
 		sudo add-apt-repository ppa:webupd8team/java -y
 		sudo apt update -y
 		sudo apt install -y oracle-java8-installer
@@ -207,14 +208,16 @@ elif [ $input == "mvn" ] || [ $input == "maven" ] ; then
 		sudo chmod +x /etc/profile.d/mavenenv.sh
 		source /etc/profile.d/mavenenv.sh
 		mvn --version
+        echo "Maven is ready to be used"
 
 elif [ $input == "hadoop" ]; then
+        echo "Installing Hadoop...."
 		wget http://www-us.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz
 		wget https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz.mds
 		shasum -a 256 hadoop-2.7.3.tar.gz
 		cat hadoop-2.7.3.tar.gz.mds
 
-		echo "please check for the checksums"
+		echo "Please check for the checksums"
 
 		tar -xzvf hadoop-2.7.4.tar.gz
 		sudo mv hadoop-2.7.4 /usr/local/hadoop
@@ -225,13 +228,41 @@ elif [ $input == "hadoop" ]; then
 		echo 'export PATH=$PATH:$HADOOP_INSTALL/sbin' | sudo tee -a ~/.bashrc
 		alias brc='source ~/.bashrc'
 		
-		echo "please run 'source ~/.bashrc' if hadoop is not working"
+		echo "Please run 'source ~/.bashrc' if hadoop is not working"
 
 elif [ $input == "vncserver" ]; then
-
+        echo "Installing VNCServer...."
 		sudo apt install xfce4 xfce4-goodies tightvncserver
+        echo "VNCServer is ready to be used"
+
+elif [ $input == "nvm" ]; then
+        echo "Installing NVM [Node Version Manager]...."
+
+        sudo apt-get update
+
+        sudo apt-get install build-essential libssl-dev
+
+        curl https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+
+        . ~/.nvm/nvm.sh
+        . ~/.profile
+        . ~/.bashrc
+
+        nvm --version
+
+        echo "Installing NVM [Node Version Manager] was successful!"
+
+        read -r -p "Please specify the NodeJS version that you want to use - " nodejsversion
+        nodejsversion="${nodejsversion}"
+
+        echo "Installing NodeJS version - $nodejsversion"
+        nvm install $nodejsversion
+
+        echo "Your NodeJS version has been converted into - $nodejsversion"
+        echo "Run 'nvm ls' to see NodeJS version installed!"
+        echo "Run 'nvm use {nodejsverison}' to run a specified NodeJS version from the NodeJS installed list"
 
 else 
-	echo "Nothing installed!"
-	echo "bye"
+	echo "Nothing was installed!"
+	echo "Bye!"
 fi
