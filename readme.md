@@ -3,7 +3,7 @@
 You can install packages you require easily with this script
 
 you just need to run the install.sh and it will prompt what you want.
-Just enter the package name eg. "lamp", "mean", "mongo", "opencv", "jdk", "docker"
+Just enter the package name eg. "lamp", "mean", "mongo", "opencv", "maven" , "mvn", "hadoop"
 
 It has,
 
@@ -11,7 +11,8 @@ It has,
 2. mean(mongo, express js, Angular js, node js
 3. mongodb
 4. opencv
-5. jdk
-6. docker
+5. Docker
+6. Hadoop
+7. VNC Server
 
 referred this for opencv https://github.com/jayrambhia/Install-OpenCV

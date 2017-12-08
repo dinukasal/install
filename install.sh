@@ -2,7 +2,7 @@
 #lamp
 
 echo "currently supports only Ubuntu 16.04"
-echo "You need to install lamp, mean, mongo, opencv, jdk, docker ?"
+echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop/vncserver] ?"
 
 read input
 
@@ -31,10 +31,13 @@ if [ $input == "lamp" ]; then
 elif [ $input == "mean" ]; then
 	echo "installing mean stack.."
 	sudo apt install git -y
-	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 	
 	echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
 	sudo apt update
+	sudo apt-get install -y mongodb-org
+	sudo systemctl start mongod
 	service mongod status
 
 	echo "installing nodejs.."
@@ -150,12 +153,12 @@ elif [ $input == "opencv" ]; then
 	sudo ldconfig
 	echo "OpenCV" $version "ready to be used"
 
-elif [ $input == "jdk" ]; then
-	sudo add-apt-repository ppa:webupd8team/java
+elif [ $input == "jdk" ] || [ $input == "java" ]; then
+	sudo add-apt-repository ppa:webupd8team/java -y
 
-	sudo apt update; sudo apt install oracle-java8-installer
+	sudo apt update; sudo apt install -y oracle-java8-installer
 	javac -version
-	sudo apt install oracle-java8-set-default
+	sudo apt install -y oracle-java8-set-default
 
 elif [ $input == "docker" ]; then
         echo "Installing Docker...."
@@ -190,6 +193,43 @@ elif [ $input == "docker" ]; then
         fi
 
         echo "Docker is ready to be used"
+
+elif [ $input == "mvn" ] || [ $input == "maven" ] ; then
+		sudo add-apt-repository ppa:webupd8team/java -y
+		sudo apt update -y
+		sudo apt install -y oracle-java8-installer
+		cd /opt/
+		sudo wget http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+		sudo tar -xvzf apache-maven-3.3.9-bin.tar.gz
+		sudo mv apache-maven-3.3.9 maven 
+		echo 'export M2_HOME=/opt/maven
+				export PATH=${M2_HOME}/bin:${PATH}' | sudo tee /etc/profile.d/mavenenv.sh;
+		sudo chmod +x /etc/profile.d/mavenenv.sh
+		source /etc/profile.d/mavenenv.sh
+		mvn --version
+
+elif [ $input == "hadoop" ]; then
+		wget http://www-us.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz
+		wget https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz.mds
+		shasum -a 256 hadoop-2.7.3.tar.gz
+		cat hadoop-2.7.3.tar.gz.mds
+
+		echo "please check for the checksums"
+
+		tar -xzvf hadoop-2.7.4.tar.gz
+		sudo mv hadoop-2.7.4 /usr/local/hadoop
+		#readlink -f /usr/bin/java | sed "s:bin/java::"
+		echo 'export JAVA_HOME=/usr/lib/jvm/java-8-oracle/' | sudo tee -a ~/.bashrc
+		echo 'export HADOOP_INSTALL=/usr/local/hadoop' | sudo tee -a ~/.bashrc
+		echo 'export PATH=$PATH:$HADOOP_INSTALL/bin' | sudo tee -a ~/.bashrc
+		echo 'export PATH=$PATH:$HADOOP_INSTALL/sbin' | sudo tee -a ~/.bashrc
+		alias brc='source ~/.bashrc'
+		
+		echo "please run 'source ~/.bashrc' if hadoop is not working"
+
+elif [ $input == "vncserver" ]; then
+
+		sudo apt install xfce4 xfce4-goodies tightvncserver
 
 else 
 	echo "Nothing installed!"
