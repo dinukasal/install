@@ -1,13 +1,13 @@
 #!/bin/bash
 #lamp
 
-echo "currently supports only Ubuntu 16.04"
+echo "Currently supports only Ubuntu 16.04"
 echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop/vncserver] ?"
 
 read input
 
 if [ $input == "lamp" ]; then
-	echo "installing lamp stack.."
+	echo "Installing lamp stack.."
 	sudo apt update
 	sudo apt install apache2 -y
 	sudo apache2ctl configtest
@@ -26,10 +26,10 @@ if [ $input == "lamp" ]; then
 	sudo apt install php libapache2-mod-php php-mcrypt php-mysql -y
 
 	sudo systemctl status apache2
-	echo "lamp stack installed"
+	echo "LAMP Stack Installed"
 
 elif [ $input == "mean" ]; then
-	echo "installing mean stack.."
+	echo "Installing mean stack.."
 	sudo apt install git -y
 	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 	
@@ -45,7 +45,7 @@ elif [ $input == "mean" ]; then
 	sudo apt install -y nodejs
 	sudo apt install build-essential
 	
-	echo "mean stack installed!"
+	echo "MEAN stack Installed!"
 
 elif [ $input == "opencv" ]; then
 	## not tested 
@@ -232,6 +232,6 @@ elif [ $input == "vncserver" ]; then
 		sudo apt install xfce4 xfce4-goodies tightvncserver
 
 else 
-	echo "Nothing installed!"
-	echo "bye"
+	echo "Nothing is installed!"
+	echo "Bye!"
 fi

@@ -1,8 +1,8 @@
-# Installer script for linux
+# Installer Script for Linux
 
 You can install packages you require easily with this script
 
-you just need to run the install.sh and it will prompt what you want.
+You just need to run the install.sh and it will prompt what you want.
 Just enter the package name eg. "lamp", "mean", "mongo", "opencv", "maven" , "mvn", "hadoop"
 
 It has,
@@ -15,4 +15,9 @@ It has,
 6. Hadoop
 7. VNC Server
 
-referred this for opencv https://github.com/jayrambhia/Install-OpenCV
+-- Referred this for opencv https://github.com/jayrambhia/Install-OpenCV
+
+Dependencies 
+
+1. curl
+2. wget
