@@ -2,7 +2,7 @@
 #lamp
 
 echo "Currently supports only Ubuntu 16.04"
-echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop/vncserver/nvm] ?"
+echo "You need to install [lamp/mean/mongodb/opencv/jdk/docker/mvn/hadoop/vncserver/nvm] ?"
 
 read input
 
