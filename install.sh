@@ -2,7 +2,7 @@
 #lamp
 
 echo "Currently supports only Ubuntu 16.04"
-echo "You need to install [lamp/mean/mongo/opencv/jdk/docker/mvn/hadoop/vncserver/nvm] ?"
+echo "You need to install [lamp/mean/mongodb/opencv/jdk/docker/mvn/hadoop/vncserver/nvm] ?"
 
 read input
 
@@ -262,7 +262,19 @@ elif [ $input == "nvm" ]; then
         echo "Run 'nvm ls' to see NodeJS version installed!"
         echo "Run 'nvm use {nodejsverison}' to run a specified NodeJS version from the NodeJS installed list"
 
+elif [ $input == "mongodb" ]; then
+	echo "Installing MongoDB...."
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+	sudo apt-get update
+	sudo apt-get install -y mongodb-org
+	echo "Starting Mongodb Service..."
+	sudo service mongod start
+	echo "Service started (Hopefully)..."
+	echo "Run 'mongo' to connect to the local server which is running on 27017"
+
 else 
 	echo "Nothing was installed!"
 	echo "Bye!"
 fi
+
