@@ -5,15 +5,16 @@ You can install packages you require easily with this script. (Currently support
 You just need to run the install.sh and it will prompt what you want.
 Just enter the package name eg. "lamp", "mean", "mongo", "opencv", "maven" , "mvn", "hadoop"
 
-It has,
+It consists following packages,
 
-1. lamp(linux - apache,mysql,php ) stack, 
-2. mean(mongo, express js, Angular js, node js
+1. lamp (Linux - Apache, MySql, PHP ) stack 
+2. mean (MongoDB, ExpressJS, AngularJS, NodeJS)
 3. mongodb
 4. opencv
-5. Docker
-6. Hadoop
-7. VNC Server
+5. docker
+6. hadoop
+7. vncserver
+7. nvm (For installing specified version of NodeJS)
 
 -- Referred this for opencv https://github.com/jayrambhia/Install-OpenCV
 
