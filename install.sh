@@ -273,6 +273,14 @@ elif [ $input == "mongodb" ]; then
 	echo "Service started (Hopefully)..."
 	echo "Run 'mongo' to connect to the local server which is running on 27017"
 
+elif [ $input == "phpmyadmin" ]; then
+	echo "Inastalling phpmyadmin..."
+	sudo apt-get update
+	sudo apt-get install phpmyadmin php-mbstring php-gettext
+	sudo phpenmod mcrypt
+	sudo phpenmod mbstring
+	sudo systemctl restart apache2
+	
 else 
 	echo "Nothing was installed!"
 	echo "Bye!"

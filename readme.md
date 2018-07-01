@@ -15,6 +15,7 @@ It consists following packages,
 6. hadoop
 7. vncserver
 7. nvm (For installing specified version of NodeJS)
+8. phpmyadmin
 
 -- Referred this for opencv https://github.com/jayrambhia/Install-OpenCV
 
