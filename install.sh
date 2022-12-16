@@ -1,7 +1,7 @@
 #!/bin/bash
 #lamp
 
-echo "Currently supports only Ubuntu 16.04"
+echo "Currently supports only Debian based linux distributions"
 echo "You need to install [lamp/mean/mongodb/opencv/jdk/docker/mvn/hadoop/vncserver/nvm] ?"
 
 read input
@@ -242,7 +242,7 @@ elif [ $input == "nvm" ]; then
 
         sudo apt-get install build-essential libssl-dev
 
-        curl https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+        curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
         . ~/.nvm/nvm.sh
         . ~/.profile
